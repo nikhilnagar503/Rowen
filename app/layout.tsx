@@ -11,7 +11,7 @@ const manrope = Manrope({
 
 export const metadata: Metadata = {
   title: 'CSVHero',
-  description: 'Clean, analyze, and visualize CSV data with AI',
+  description: 'Clean and analyze CSV data with AI',
 };
 
 export default function RootLayout({

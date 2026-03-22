@@ -7,7 +7,7 @@ export const NICHE = {
   domainFocus:
     'general business and operational analytics across tabular datasets',
   defaultAutopilotGoal:
-    'Run a full analysis: check data quality, profile key patterns, surface trends and drivers, build useful visuals, and finish with prioritized actions.',
+    'Run a full analysis: check data quality, profile key patterns, surface trends and drivers, and finish with prioritized actions.',
   fallbackQuickActions: [
     'Run a complete data quality check',
     'Find the most important trends and patterns',

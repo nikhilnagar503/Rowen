@@ -4,14 +4,13 @@
  * WHY THIS FILE EXISTS:
  * This is the main interactive surface of the product. Users type natural-language
  * questions or goals here and receive AI-generated analysis, Python code, text
- * output, charts, and reasoning — all displayed in a familiar chat format.
+ * output, and reasoning — all displayed in a familiar chat format.
  *
  * WHAT IT DOES:
  * - Renders a scrollable message list where each bubble can contain:
  *     • Plain text / Markdown (AI reasoning & explanations)
  *     • A collapsible Python code block (what the agent ran)
  *     • Stdout text output (print() results)
- *     • A matplotlib chart image (base64 PNG)
  *     • An error block (if code execution failed)
  * - Shows a phase label ("Execution" / "Reasoning") on assistant messages so
  *   users can visually distinguish code-running steps from reflection steps.
@@ -23,7 +22,7 @@
  *
  * ROLE IN THE PRODUCT:
  * This panel is the primary way users interact with the AI agent. It drives all
- * data exploration, cleaning, visualization, and summarization tasks in the app.
+ * data exploration, cleaning, and summarization tasks in the app.
  */
 import { useState, useRef, useEffect } from 'react';
 import { Send, User, Loader2, Paperclip, SlidersHorizontal, Wrench, Database } from 'lucide-react';
@@ -51,12 +50,23 @@ export default function ChatPanel({
   onUploadFiles,
   currentAgentActivity,
 }: ChatPanelProps) {
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState('');    // it will  store the text  that we will  enter in the  chatbox
   const [streamingMessageId, setStreamingMessageId] = useState<string | null>(null);
   const [visibleChars, setVisibleChars] = useState(0);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const autoResizeInput = () => {
+    const el = inputRef.current;
+    if (!el) {
+      return;
+    }
+
+    el.style.height = 'auto';
+    const nextHeight = Math.min(el.scrollHeight, 220);
+    el.style.height = `${Math.max(nextHeight, 52)}px`;
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
@@ -67,7 +77,12 @@ export default function ChatPanel({
     if (!input.trim() || isLoading) return;
     onSendMessage(input.trim(), runtimeOptions);
     setInput('');
+    window.setTimeout(() => autoResizeInput(), 0);
   };
+
+  useEffect(() => {
+    autoResizeInput();
+  }, [input]);
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -267,16 +282,6 @@ export default function ChatPanel({
                     </div>
                   )}
 
-                  {msg.chartUrl && (
-                    <div className="ml-8">
-                      <img
-                        src={msg.chartUrl}
-                        alt="Chart"
-                        className="max-w-full rounded-lg border border-[#2a2a2a]"
-                      />
-                    </div>
-                  )}
-
                   {msg.error && (
                     <div className="ml-8">
                       <pre className="rounded-lg border border-rose-900/70 bg-rose-950/30 p-3 text-xs text-rose-300">
@@ -322,16 +327,19 @@ export default function ChatPanel({
         </div>
       </div>
 
-      <div className="sticky bottom-0 z-20 border-t border-[#1b1b1b] bg-[#0a0a0a]/95 px-3 pb-3 pt-2 backdrop-blur sm:px-6 sm:pb-4 sm:pt-3">
-        <form onSubmit={handleSubmit} className="mx-auto w-full max-w-[1240px]">
+      <div className="sticky bottom-0 z-20 bg-[#060606]/96 px-3 pb-3 pt-2 backdrop-blur sm:px-6 sm:pb-4 sm:pt-3">
+        <form onSubmit={handleSubmit} className="mx-auto w-full max-w-[980px]">
           <div className="rounded-2xl border border-[#2a2a2a] bg-[#171717] p-3 shadow-[0_20px_60px_rgba(0,0,0,0.35)]">
             <textarea
               ref={inputRef}
               value={input}
-              onChange={(e) => setInput(e.target.value)}
+              onChange={(e) => {
+                setInput(e.target.value);
+                autoResizeInput();
+              }}
               onKeyDown={handleKeyDown}
               placeholder="Send a message..."
-              className="min-h-[52px] max-h-[132px] w-full resize-none bg-transparent px-1 py-1 text-base text-slate-100 placeholder-slate-500 focus:outline-none"
+              className="min-h-[52px] max-h-[220px] w-full resize-none overflow-y-auto bg-transparent px-1 py-1 text-base text-slate-100 placeholder-slate-500 focus:outline-none"
               rows={1}
               disabled={isLoading}
             />

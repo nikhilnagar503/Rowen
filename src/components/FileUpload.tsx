@@ -1,20 +1,18 @@
 /**
- * FileUpload.tsx — CSV File Drop Zone & Picker
- 
+ * FileUpload.tsx - CSV File Drop Zone & Picker
  *
  * WHAT IT DOES:
  * - Renders a full-screen centered drop-zone card with drag-and-drop support.
- * - Also exposes a hidden `<input type="file">` so users can click to browse.
+ * - Also exposes a hidden <input type="file"> so users can click to browse.
  * - Validates that only CSV/TSV/TXT files are accepted (shows alert otherwise).
- * - Uses the browser-native `FileReader` API to read the file as plain text.
- * - Once read, calls `onFileLoad(fileName, content)` to pass the raw text up
- *   to the parent (`LandingView` → `useCsvHeroApp`) where pandas parses it.
- * - Shows a spinning loader while the Pyodide Python runtime is booting up
- *   (the first run takes ~10 s to download ~30 MB from the CDN).
+ * - Uses the browser-native FileReader API to read the file as plain text.
+ * - Once read, calls onFileLoad(fileName, content) to pass the raw text up
+ *   to the parent (App -> useCsvHeroApp) where pandas parses it.
+ * - Shows a spinning loader while the Pyodide Python runtime is booting up.
  *
  * ROLE IN THE PRODUCT:
- * This is the very first real interaction in the app. Everything else (AI chat,
- * data dashboard, charts) depends on a file being loaded here first.
+ * This is the first real interaction in the app. Everything else (AI chat,
+ * analysis workflow) depends on a file being loaded here first.
  */
 import { useCallback } from 'react';
 import { Upload, FileSpreadsheet } from 'lucide-react';
@@ -134,3 +132,8 @@ export default function FileUpload({ onFileLoad, isLoading }: FileUploadProps) {
     </div>
   );
 }
+
+
+
+
+

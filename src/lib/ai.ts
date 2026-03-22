@@ -48,7 +48,7 @@
  * ROLE IN THE PRODUCT:
  * This file is the brain's language centre. Every AI call in the app passes
  * through here, with carefully engineered prompts that keep the agent focused,
- * code-correct, and safe (no plt.show(), no file reads, no package installs).
+ * code-correct, and safe (no file reads, no package installs).
  */
 // AI Service — Sends messages to Claude/OpenAI and gets Python code back
 
@@ -70,19 +70,19 @@ ANALYSIS PRIORITY:
 - Start from the user's explicit goal and dataset context.
 - If required fields are missing, clearly state assumptions and propose the minimum additional columns needed.
 
-You have access to: pandas (pd), numpy (np), matplotlib.pyplot (plt). Seaborn (sns) MAY be available — always wrap seaborn usage in a try/except and fall back to matplotlib if it fails.
+You have access to: pandas (pd), numpy (np).
 
 YOUR BEHAVIOR:
 1. When the user asks about their data, write Python code to answer.
 2. If the user's intent is broad or ambiguous, ask 2-4 clarifying questions first and DO NOT write code yet.
 3. Never clean or transform data unless the user explicitly asks for cleaning/transformation.
 4. Use print() to output text results.
-5. Use matplotlib for visualizations — just use plt.plot()/plt.hist()/etc, the chart will be saved automatically.
+5. Focus on tabular analysis outputs and actionable findings.
 6. When modifying data (cleaning, fixing, etc.), modify \`df\` in-place or reassign to \`df\`.
 7. Always explain what you're doing in plain English BEFORE the code.
 8. After modifying data, print a summary of what changed.
 9. Be proactive — suggest next steps the user might want to take.
-10. PREFER matplotlib over seaborn to avoid import errors.
+10. Keep code deterministic and easy to debug.
 
 RESPONSE FORMAT:
 - If clarification is needed, ask questions only (no code block).
@@ -101,11 +101,9 @@ WRITING STYLE (important):
 - Use simple markdown line breaks/paragraphs so UI renders a well-structured response.
 
 IMPORTANT RULES:
-- Do NOT use plt.show() — charts are captured automatically
 - Do NOT try to read files — the data is already in \`df\`
-- Do NOT install packages — only use pd, np, plt
+- Do NOT install packages — only use pd, np
 - Use print() for any text output you want the user to see
-- When creating charts, use clear titles, labels, and the dark theme is already set
 - For large outputs, limit to head/tail/sample, don't dump entire dataframes`;
 
 const REFLECTION_PROMPT = `You are CSVHero's reasoning layer.
@@ -515,7 +513,7 @@ export async function generateRecommendedActions(dfInfo: DataFrameInfo | null): 
     return [
       'Scan dataset and propose a cleaning plan',
       'Fix missing values, duplicates, and data types',
-      'Run cleaning and show validation charts',
+      'Run cleaning and print a validation summary',
       'Create a plain-English data quality report',
     ];
   }
@@ -535,6 +533,5 @@ export function getAutoAnalysisPrompt(): string {
 
 Write Python code that:
 - Prints a summary of the dataset
-- Identifies and prints data quality issues
-- Creates ONE overview visualization (choose the most informative one — could be a missing values heatmap, distribution of a key column, or correlation matrix)`;
+- Identifies and prints data quality issues`;
 }

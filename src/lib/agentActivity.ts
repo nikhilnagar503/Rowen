@@ -40,14 +40,6 @@ export function getToolActivityLabel(tool: CleaningToolName): string {
       return 'Lowercasing text values';
     case 'validate_dataset':
       return 'Validating cleaned dataset';
-    case 'plot_histogram':
-      return 'Generating histogram';
-    case 'plot_correlation_heatmap':
-      return 'Generating correlation heatmap';
-    case 'plot_boxplot':
-      return 'Generating boxplot';
-    case 'plot_bar_chart':
-      return 'Generating bar chart';
     default:
       return 'Processing current step';
   }

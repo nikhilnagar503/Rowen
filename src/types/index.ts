@@ -13,7 +13,6 @@ export type Message = {
   phase?: MessagePhase;
   code?: string;
   output?: string;
-  chartUrl?: string;
   error?: string;
 };
 
@@ -30,7 +29,6 @@ export type DataFrameInfo = {
 
 export type CodeExecutionResult = {
   output: string;
-  chartUrl: string | null;
   tableHtml: string | null;
   error: string | null;
   updatedDfInfo: DataFrameInfo | null;

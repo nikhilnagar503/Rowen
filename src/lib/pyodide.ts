@@ -50,56 +50,16 @@ export async function initPyodide(): Promise<void> {
       indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.26.4/full/',
     });
 
-    await pyodide.loadPackage(['pandas', 'numpy', 'matplotlib', 'micropip']);
-
-    try {
-      await pyodide.runPythonAsync(`
-import micropip
-await micropip.install('seaborn')
-`);
-    } catch {
-      // Seaborn is optional.
-    }
+        await pyodide.loadPackage(['pandas', 'numpy']);
 
     await pyodide.runPythonAsync(`
-import matplotlib
-matplotlib.use('AGG')
-import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
-import io
-import base64
 import json
 
 datasets = {}
 active_dataset_name = None
 
-try:
-    import seaborn as sns
-    _has_seaborn = True
-except ImportError:
-    _has_seaborn = False
-
-def _save_chart():
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png', dpi=100, bbox_inches='tight', facecolor='#1e1e2e', edgecolor='none')
-    buf.seek(0)
-    img_b64 = base64.b64encode(buf.read()).decode('utf-8')
-    plt.close('all')
-    return 'data:image/png;base64,' + img_b64
-
-plt.style.use('dark_background')
-plt.rcParams.update({
-    'figure.facecolor': '#1e1e2e',
-    'axes.facecolor': '#1e1e2e',
-    'text.color': '#cdd6f4',
-    'axes.labelcolor': '#cdd6f4',
-    'xtick.color': '#a6adc8',
-    'ytick.color': '#a6adc8',
-    'axes.edgecolor': '#45475a',
-    'grid.color': '#313244',
-    'figure.figsize': [10, 6],
-})
 `);
 
     initDone = true;
@@ -154,38 +114,8 @@ import io
 _old_stdout = sys.stdout
 sys.stdout = _captured_output = io.StringIO()
 
-_chart_b64 = None
-
-_tool_alias = {
-    'get_missing_values': 'detect_missing_values',
-    'remove_duplicates_subset': 'remove_duplicates',
-    'plot_distribution': 'plot_histogram',
-}
-
-if _tool in _tool_alias:
-    _tool = _tool_alias[_tool]
-
-def _first_numeric_col():
-    cols = df.select_dtypes(include=['number']).columns.tolist()
-    return cols[0] if cols else None
-
-def _first_text_col():
-    cols = df.select_dtypes(include=['object', 'category', 'string']).columns.tolist()
-    return cols[0] if cols else None
-
-def _safe_column(preferred=None, numeric=False, text=False):
-    if preferred and preferred in df.columns:
-        return preferred
-    if numeric:
-        return _first_numeric_col()
-    if text:
-        return _first_text_col()
-    return df.columns[0] if len(df.columns) > 0 else None
-
 try:
 ${code.split('\n').map((line) => `    ${line}`).join('\n')}
-    if plt.get_fignums():
-        _chart_b64 = _save_chart()
 except Exception as e:
     print('Error: ' + str(e))
 
@@ -194,7 +124,6 @@ _output_text = _captured_output.getvalue()
 
 _result = {
     'output': _output_text,
-    'chartUrl': _chart_b64,
     'error': None,
 }
 
@@ -220,7 +149,6 @@ json.dumps(_result)
 
     return {
       output: result.output || '',
-      chartUrl: result.chartUrl || null,
       tableHtml: null,
       error: result.error || null,
       updatedDfInfo: result.updatedDfInfo || null,
@@ -228,7 +156,6 @@ json.dumps(_result)
     } catch (error: unknown) {
     return {
       output: '',
-      chartUrl: null,
       tableHtml: null,
             error: getErrorMessage(error),
       updatedDfInfo: null,
@@ -258,8 +185,6 @@ _args = json.loads(_tool_args_json)
 
 _old_stdout = sys.stdout
 sys.stdout = _captured_output = io.StringIO()
-
-_chart_b64 = None
 
 try:
     if _tool == 'dataset_summary':
@@ -450,72 +375,6 @@ try:
         print('Columns: ' + str(df.shape[1]))
         print('Total missing values: ' + str(int(df.isnull().sum().sum())))
         print('Duplicate rows: ' + str(int(df.duplicated().sum())))
-
-    elif _tool == 'plot_histogram':
-        col = _args.get('column')
-        if not col or col not in df.columns:
-            numeric_cols = df.select_dtypes(include=['number']).columns.tolist()
-            col = numeric_cols[0] if numeric_cols else None
-        if not col:
-            print('No numeric column available for histogram.')
-        else:
-            plt.figure()
-            pd.to_numeric(df[col], errors='coerce').dropna().hist(bins=30)
-            plt.title('Distribution of ' + str(col))
-            plt.xlabel(str(col))
-            plt.ylabel('Count')
-            _chart_b64 = _save_chart()
-            print('Generated histogram for ' + str(col) + '.')
-
-    elif _tool == 'plot_correlation_heatmap':
-        numeric = df.select_dtypes(include=['number'])
-        if numeric.shape[1] < 2:
-            print('Need at least two numeric columns for correlation heatmap.')
-        else:
-            corr = numeric.corr()
-            plt.figure(figsize=(9, 6))
-            plt.imshow(corr, cmap='coolwarm', aspect='auto')
-            plt.colorbar(label='Correlation')
-            plt.xticks(range(len(corr.columns)), corr.columns, rotation=45, ha='right')
-            plt.yticks(range(len(corr.index)), corr.index)
-            plt.title('Correlation Heatmap')
-            plt.tight_layout()
-            _chart_b64 = _save_chart()
-            print('Generated correlation heatmap.')
-
-    elif _tool == 'plot_boxplot':
-        col = _args.get('column')
-        if not col or col not in df.columns:
-            numeric_cols = df.select_dtypes(include=['number']).columns.tolist()
-            col = numeric_cols[0] if numeric_cols else None
-        if not col:
-            print('No numeric column available for boxplot.')
-        else:
-            plt.figure()
-            plt.boxplot(pd.to_numeric(df[col], errors='coerce').dropna())
-            plt.title('Boxplot of ' + str(col))
-            plt.ylabel(str(col))
-            _chart_b64 = _save_chart()
-            print('Generated boxplot for ' + str(col) + '.')
-
-    elif _tool == 'plot_bar_chart':
-        col = _args.get('column')
-        if not col or col not in df.columns:
-            object_cols = df.select_dtypes(include=['object', 'category', 'string']).columns.tolist()
-            col = object_cols[0] if object_cols else None
-        if not col:
-            print('No categorical column available for bar chart.')
-        else:
-            top_n = int(_args.get('top_n', 12))
-            counts = df[col].astype(str).value_counts().head(top_n)
-            plt.figure(figsize=(10, 5))
-            counts.plot(kind='bar')
-            plt.title('Top categories in ' + str(col))
-            plt.ylabel('Count')
-            plt.xticks(rotation=45, ha='right')
-            plt.tight_layout()
-            _chart_b64 = _save_chart()
-            print('Generated bar chart for ' + str(col) + '.')
 
     elif _tool == 'get_column_types':
         print(df.dtypes.astype(str).to_string())
@@ -1000,44 +859,6 @@ try:
     elif _tool == 'detect_data_drift':
         print('Data drift detection requires baseline/reference dataset. Stub executed.')
 
-    elif _tool == 'plot_scatter':
-        num = df.select_dtypes(include=['number']).columns.tolist()
-        if len(num) < 2:
-            print('Need at least two numeric columns for scatter plot.')
-        else:
-            x = _args.get('x') if _args.get('x') in df.columns else num[0]
-            y = _args.get('y') if _args.get('y') in df.columns else num[1]
-            plt.figure()
-            plt.scatter(pd.to_numeric(df[x], errors='coerce'), pd.to_numeric(df[y], errors='coerce'), alpha=0.6)
-            plt.xlabel(str(x)); plt.ylabel(str(y)); plt.title(str(y) + ' vs ' + str(x))
-            _chart_b64 = _save_chart()
-            print('Generated scatter plot for ' + str(x) + ' vs ' + str(y) + '.')
-
-    elif _tool == 'plot_line_chart':
-        num = df.select_dtypes(include=['number']).columns.tolist()
-        if len(num) == 0:
-            print('Need a numeric column for line chart.')
-        else:
-            y = _args.get('y') if _args.get('y') in df.columns else num[0]
-            plt.figure()
-            plt.plot(pd.to_numeric(df[y], errors='coerce').reset_index(drop=True))
-            plt.title('Line chart of ' + str(y)); plt.xlabel('Index'); plt.ylabel(str(y))
-            _chart_b64 = _save_chart()
-            print('Generated line chart for ' + str(y) + '.')
-
-    elif _tool == 'plot_pairplot':
-        num = df.select_dtypes(include=['number']).head(200)
-        if num.shape[1] < 2:
-            print('Need at least two numeric columns for pairplot.')
-        else:
-            if _has_seaborn:
-                import seaborn as sns
-                sns.pairplot(num.iloc[:, :4].dropna())
-                _chart_b64 = _save_chart()
-                print('Generated pairplot.')
-            else:
-                print('Seaborn not available for pairplot.')
-
     elif _tool == 'pivot_table':
         idx = _args.get('index')
         val = _args.get('values')
@@ -1140,18 +961,6 @@ try:
             suggestions.append('Encode categorical feature ' + str(text[0]) + ' (one-hot or label)')
         print('Feature suggestions:\n- ' + ('\n- '.join(suggestions) if suggestions else 'No obvious suggestions.'))
 
-    elif _tool == 'auto_visualization':
-        num = df.select_dtypes(include=['number']).columns.tolist()
-        if len(num) == 0:
-            print('No numeric columns available for auto visualization.')
-        else:
-            col = num[0]
-            plt.figure()
-            pd.to_numeric(df[col], errors='coerce').dropna().hist(bins=30)
-            plt.title('Auto visualization: ' + str(col))
-            _chart_b64 = _save_chart()
-            print('Generated auto visualization for ' + str(col) + '.')
-
     elif _tool == 'generate_data_report':
         print('Data Report')
         print('Rows: ' + str(df.shape[0]))
@@ -1185,7 +994,6 @@ _output_text = _captured_output.getvalue()
 
 _result = {
     'output': _output_text,
-    'chartUrl': _chart_b64,
     'error': None,
 }
 
@@ -1209,7 +1017,6 @@ json.dumps(_result)
     const result = JSON.parse(resultJson);
     return {
       output: result.output || '',
-      chartUrl: result.chartUrl || null,
       tableHtml: null,
       error: result.error || null,
       updatedDfInfo: result.updatedDfInfo || null,
@@ -1217,7 +1024,6 @@ json.dumps(_result)
     } catch (error: unknown) {
     return {
       output: '',
-      chartUrl: null,
       tableHtml: null,
             error: getErrorMessage(error),
       updatedDfInfo: null,
