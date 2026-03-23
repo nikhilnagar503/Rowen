@@ -44,7 +44,6 @@ interface WorkspaceViewProps {
   onSelectSession: (sessionId: string) => void | Promise<void>;
   runtimeOptions: ChatRuntimeOptions;
   onRuntimeOptionsChange: (next: ChatRuntimeOptions) => void;
-  currentAgentActivity: string | null;
 }
 
 export default function WorkspaceView({
@@ -59,7 +58,6 @@ export default function WorkspaceView({
   onSelectSession,
   runtimeOptions,
   onRuntimeOptionsChange,
-  currentAgentActivity,
 }: WorkspaceViewProps) {
   const { user } = useUser();
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
@@ -260,7 +258,6 @@ export default function WorkspaceView({
               isFileLoading={isPyodideLoading}
               onSendMessage={onSendMessage}
               onUploadFiles={onUploadFiles}
-              currentAgentActivity={currentAgentActivity}
             />
 
             

@@ -48,7 +48,6 @@ export function useCsvHeroApp() {
   const [sessionList, setSessionList] = useState<PersistedSessionSummary[]>([]);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('local-only');
   const [requiresFileReload, setRequiresFileReload] = useState(false);
-  const [currentAgentActivity, setCurrentAgentActivity] = useState<string | null>(null);
   const [runtimeOptions, setRuntimeOptions] = useState<ChatRuntimeOptions>({
     model: 'gpt-4o-mini',
     toolsEnabled: true,
@@ -110,7 +109,6 @@ export function useCsvHeroApp() {
     setSessionList,
     setSyncStatus,
     setRequiresFileReload,
-    setCurrentAgentActivity,
   });
 
   const ensurePyodide = useCallback(async () => {
@@ -149,7 +147,6 @@ export function useCsvHeroApp() {
     setIsLoading,
     setMessages,
     setDfInfo,
-    setCurrentAgentActivity,
   });
 
   const { handleFileLoad, handleUploadFiles, handleDownload } = useFileActions({
@@ -175,7 +172,6 @@ export function useCsvHeroApp() {
     setSessionTitle(null);
     setSessionId(null);
     setRequiresFileReload(false);
-    setCurrentAgentActivity(null);
     setSyncStatus(isSignedIn ? 'saved' : 'local-only');
     resetCloudSyncTracking();
   }, [isSignedIn, resetCloudSyncTracking]);
@@ -217,7 +213,6 @@ export function useCsvHeroApp() {
     handleCreateSession,
     handleSelectSession,
     qualitySummary,
-    currentAgentActivity,
   };
 }
 

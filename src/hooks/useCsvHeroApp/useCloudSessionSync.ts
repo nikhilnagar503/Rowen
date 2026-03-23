@@ -36,7 +36,6 @@ type UseCloudSessionSyncArgs = {
   setSessionList: Setter<PersistedSessionSummary[]>;
   setSyncStatus: Setter<SyncStatus>;
   setRequiresFileReload: Setter<boolean>;
-  setCurrentAgentActivity: Setter<string | null>;
 };
 
 export function useCloudSessionSync({
@@ -63,14 +62,11 @@ export function useCloudSessionSync({
   setSessionList,
   setSyncStatus,
   setRequiresFileReload,
-  setCurrentAgentActivity,
 }: UseCloudSessionSyncArgs) {
   const restoreStartedRef = useRef(false);
   const lastSyncedFingerprintRef = useRef('');
 
   const applySessionState = useCallback((session: PersistedSession | null) => {
-    setCurrentAgentActivity(null);
-
     if (!session) {
       setSessionId(null);
       setFileName(null);
@@ -107,7 +103,6 @@ export function useCloudSessionSync({
       latestGoal: session.latestGoal ?? getLatestGoal(session.messages),
     });
   }, [
-    setCurrentAgentActivity,
     setDfInfo,
     setFileName,
     setFileNames,

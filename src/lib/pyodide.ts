@@ -1,4 +1,4 @@
-import type { CodeExecutionResult, CleaningToolName, DataFrameInfo } from '../types/index';
+import type { CodeExecutionResult, DataFrameInfo } from '../types/index';
 
 type PyodideApi = {
     loadPackage: (packages: string[]) => Promise<void>;
@@ -164,7 +164,7 @@ json.dumps(_result)
 }
 
 export async function runCleaningTool(
-  tool: CleaningToolName,
+    tool: string,
   args: Record<string, unknown> = {}
 ): Promise<CodeExecutionResult> {
   if (!pyodide || !initDone) {

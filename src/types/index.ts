@@ -1,16 +1,10 @@
-export type MessageRole = 'system' | 'user' | 'assistant';
-
-export type MessagePhase = 'execution' | 'reflection';
-
-export type MessageKind = 'quality-delta' | 'file-load' | 'warning' | 'reminder';
-
 export type Message = {
   id: string;
-  role: MessageRole;
-  kind?: MessageKind;
+  role: 'system' | 'user' | 'assistant';
+  kind?: 'quality-delta' | 'file-load' | 'warning' | 'reminder';
   content: string;
   timestamp: number;
-  phase?: MessagePhase;
+  phase?: 'execution' | 'reflection';
   code?: string;
   output?: string;
   error?: string;
@@ -63,5 +57,3 @@ export type PersistedSessionSummary = {
 };
 
 export type SyncStatus = 'local-only' | 'syncing' | 'saved' | 'disabled' | 'error';
-
-export type CleaningToolName = string;

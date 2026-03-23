@@ -18,7 +18,6 @@ type UseChatActionsArgs = {
   setIsLoading: Setter<boolean>;
   setMessages: Setter<Message[]>;
   setDfInfo: Setter<DataFrameInfo | null>;
-  setCurrentAgentActivity: Setter<string | null>;
 };
 
 export function useChatActions({
@@ -32,7 +31,6 @@ export function useChatActions({
   setIsLoading,
   setMessages,
   setDfInfo,
-  setCurrentAgentActivity,
 }: UseChatActionsArgs) {
   const runAgentLoop = useCallback(async (
     userText: string,
@@ -62,9 +60,7 @@ export function useChatActions({
       return;
     }
 
-    setCurrentAgentActivity('Running Python analysis...');
     const result = await executeCode(code);
-    setCurrentAgentActivity(null);
 
     if (result.updatedDfInfo) {
       setDfInfo(result.updatedDfInfo);
@@ -83,7 +79,7 @@ export function useChatActions({
         timestamp: Date.now(),
       },
     ]);
-  }, [fileName, fileNames, setCurrentAgentActivity, setDfInfo, setMessages]);
+  }, [fileName, fileNames, setDfInfo, setMessages]);
 
   const handleSendMessage = useCallback(async (userText: string, options?: ChatRuntimeOptions) => {
     setIsLoading(true);
@@ -101,7 +97,6 @@ export function useChatActions({
       setMessages((prev) => [...prev, userMsg]);
       await runAgentLoop(userText, dfInfo, [...messages, userMsg], effectiveOptions);
     } catch (error: unknown) {
-      setCurrentAgentActivity(null);
       const errorMessage = error instanceof Error ? error.message : String(error);
 
       if (errorMessage.includes('re-upload your CSV')) {
@@ -126,7 +121,7 @@ export function useChatActions({
     } finally {
       setIsLoading(false);
     }
-  }, [dfInfo, ensureAnalysisReady, messages, runAgentLoop, runtimeOptions, setCurrentAgentActivity, setIsLoading, setMessages]);
+  }, [dfInfo, ensureAnalysisReady, messages, runAgentLoop, runtimeOptions, setIsLoading, setMessages]);
 
   const runGoal = useCallback(async (goal: string, options?: ChatRuntimeOptions) => {
     await handleSendMessage(goal, options);

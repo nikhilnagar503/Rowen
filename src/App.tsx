@@ -33,7 +33,6 @@ function App() {
     handleUploadFiles,
     handleCreateSession,
     handleSelectSession,
-    currentAgentActivity,
   } = useCsvHeroApp();
 
   return (
@@ -50,7 +49,6 @@ function App() {
         onSelectSession={handleSelectSession}
         runtimeOptions={runtimeOptions}
         onRuntimeOptionsChange={setRuntimeOptions}
-        currentAgentActivity={currentAgentActivity}
       />
     </>
   );
