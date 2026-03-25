@@ -18,13 +18,13 @@ export function toDatasetTitle(fileName: string): string {
 }
 
 export function summarizeSession(session: PersistedSession): PersistedSessionSummary {
-  const title = session.sessionTitle?.trim() || session.fileName?.trim() || session.latestGoal?.trim() || 'Untitled session';
+  const title = session.sessionTitle?.trim() || session.fileNames[0]?.trim() || session.latestGoal?.trim() || 'Untitled session';
 
   return {
     id: session.id,
     title,
     sessionTitle: session.sessionTitle,
-    fileName: session.fileName,
+    fileName: session.fileNames[0] ?? null,
     updatedAt: session.updatedAt,
     messageCount: session.messages.length,
   };
@@ -48,3 +48,4 @@ export function getQualitySnapshot(info: DataFrameInfo) {
     score,
   };
 }
+

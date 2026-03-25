@@ -1,14 +1,19 @@
 import { useCallback } from 'react';
 import type { Dispatch, SetStateAction } from 'react';
-import { executeCode } from '../../lib/pyodide';
-import { sendMessage } from '../../lib/ai';
+import { normalizeError } from '../../lib/errors';
+import { createCorrelationId, logAppError } from '../../lib/observability';
 import type { ChatRuntimeOptions, DataFrameInfo, Message } from '../../types/index';
 import { newId } from './utils';
+import {
+  buildAssistantErrorMessage,
+  buildReminderMessage,
+  runAgentLoop,
+} from './chatActionsHelpers';
 
 type Setter<T> = Dispatch<SetStateAction<T>>;
 
 type UseChatActionsArgs = {
-  fileName: string | null;
+  activeFileName: string | null;
   fileNames: string[];
   dfInfo: DataFrameInfo | null;
   messages: Message[];
@@ -21,7 +26,7 @@ type UseChatActionsArgs = {
 };
 
 export function useChatActions({
-  fileName,
+  activeFileName,
   fileNames,
   dfInfo,
   messages,
@@ -32,56 +37,8 @@ export function useChatActions({
   setMessages,
   setDfInfo,
 }: UseChatActionsArgs) {
-  const runAgentLoop = useCallback(async (
-    userText: string,
-    initialDfInfo: DataFrameInfo | null,
-    initialHistory: Message[],
-    options: ChatRuntimeOptions
-  ) => {
-    const { explanation, code } = await sendMessage(
-      userText,
-      initialDfInfo,
-      initialHistory,
-      fileNames,
-      fileName,
-      options
-    );
-
-    if (!code) {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: newId(),
-          role: 'assistant',
-          content: explanation,
-          timestamp: Date.now(),
-        },
-      ]);
-      return;
-    }
-
-    const result = await executeCode(code);
-
-    if (result.updatedDfInfo) {
-      setDfInfo(result.updatedDfInfo);
-    }
-
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: newId(),
-        role: 'assistant',
-        phase: 'execution',
-        content: explanation,
-        code,
-        output: result.output || undefined,
-        error: result.error || undefined,
-        timestamp: Date.now(),
-      },
-    ]);
-  }, [fileName, fileNames, setDfInfo, setMessages]);
-
   const handleSendMessage = useCallback(async (userText: string, options?: ChatRuntimeOptions) => {
+    const correlationId = createCorrelationId('chat-send');
     setIsLoading(true);
 
     try {
@@ -95,41 +52,32 @@ export function useChatActions({
       };
 
       setMessages((prev) => [...prev, userMsg]);
-      await runAgentLoop(userText, dfInfo, [...messages, userMsg], effectiveOptions);
+      await runAgentLoop({
+        userText,
+        initialDfInfo: dfInfo,
+        initialHistory: [...messages, userMsg],
+        options: effectiveOptions,
+        fileNames,
+        activeFileName,
+        setMessages,
+        setDfInfo,
+      });
     } catch (error: unknown) {
-      const errorMessage = error instanceof Error ? error.message : String(error);
-
-      if (errorMessage.includes('re-upload your CSV')) {
-        const reminderMsg: Message = {
-          id: newId(),
-          role: 'system',
-          content: '📎 Please re-upload your CSV from the chat bar clip icon to continue this saved session.',
-          timestamp: Date.now(),
-        };
-        setMessages((prev) => [...prev, reminderMsg]);
+      const appError = normalizeError(error);
+      logAppError('useChatActions.handleSendMessage', correlationId, appError);
+      if (appError.message.includes('re-upload your CSV')) {
+        setMessages((prev) => [...prev, buildReminderMessage()]);
         return;
       }
-
-      const assistantErrorMsg: Message = {
-        id: newId(),
-        role: 'assistant',
-        content: 'Something went wrong.',
-        error: errorMessage,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, assistantErrorMsg]);
+      setMessages((prev) => [...prev, buildAssistantErrorMessage(appError.message)]);
     } finally {
       setIsLoading(false);
     }
-  }, [dfInfo, ensureAnalysisReady, messages, runAgentLoop, runtimeOptions, setIsLoading, setMessages]);
+  }, [activeFileName, dfInfo, ensureAnalysisReady, fileNames, messages, runtimeOptions, setDfInfo, setIsLoading, setMessages]);
 
   const runGoal = useCallback(async (goal: string, options?: ChatRuntimeOptions) => {
     await handleSendMessage(goal, options);
   }, [handleSendMessage]);
-
-  const handleRunRecommendedAction = useCallback(async (action: string) => {
-    await runGoal(action);
-  }, [runGoal]);
 
   const handleRunAutopilot = useCallback(async () => {
     await runGoal(defaultAutopilotGoal);
@@ -137,7 +85,7 @@ export function useChatActions({
 
   return {
     handleSendMessage,
-    handleRunRecommendedAction,
     handleRunAutopilot,
   };
 }
+

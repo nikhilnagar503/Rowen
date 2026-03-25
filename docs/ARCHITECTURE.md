@@ -73,3 +73,43 @@ CSVHero is a client-heavy analysis app where UI state and orchestration live in 
 
 - Browser-only: Pyodide execution (`src/lib/pyodide.ts`), chat UI, local state.
 - Server-only: OpenAI API key usage (`/api/chat`), Supabase service-role writes (`/api/session`).
+
+## Ownership Lanes and Contracts
+
+To support concurrent feature work by multiple engineers, ownership is split by layer.
+
+1. Lane A: UI Experience (`src/components/**`, `src/components/layout/**`)
+- Allowed: rendering, local input state, presentational refactors
+- Not allowed: direct API calls, direct Pyodide calls, direct persistence writes
+
+2. Lane B: Orchestration and App State (`src/hooks/useCsvHeroApp.ts`, `src/hooks/useCsvHeroApp/**`)
+- Allowed: state transitions, handler composition, side-effect orchestration
+- Contract: expose stable handler + state interface to UI
+
+3. Lane C: AI Gateway (`src/lib/ai.ts`, `app/api/chat/route.ts`)
+- Allowed: prompt changes, response parsing, model/runtime options mapping
+- Contract: keep response envelope stable for orchestration hooks
+
+4. Lane D: Persistence and Auth (`src/lib/persistence.ts`, `app/api/session/route.ts`, `src/lib/supabase/server.ts`, `supabase/schema.sql`)
+- Allowed: session persistence logic and schema evolution
+- Contract: preserve `storageAvailable` fallback semantics
+
+5. Lane E: Runtime Execution (`src/lib/pyodide.ts` + execution paths in hooks)
+- Allowed: runtime initialization, code execution safeguards, dataset execution flow
+- Contract: deterministic `CodeExecutionResult` shape
+
+## Contribution Safety Rules
+
+- Prefer lane-local PRs. If a change spans lanes, mark as cross-lane.
+- Keep UI files side-effect free.
+- Normalize async errors through shared helper (`src/lib/errors.ts`).
+- Use correlation-id logging for async boundaries (`src/lib/observability.ts`).
+- Preserve behavior unless PR explicitly states product change.
+
+## Critical Flows to Smoke Test After Changes
+
+1. Upload CSV -> dataset message appears -> onboarding message appears.
+2. Send user message -> AI response appears -> code execution output appears.
+3. Create new session -> state resets immediately.
+4. Reload while signed in -> latest session restore behaves correctly.
+5. Supabase unavailable -> app remains usable in local-only mode.

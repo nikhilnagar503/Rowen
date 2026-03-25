@@ -1,0 +1,44 @@
+.chat-markdown p { margin-bottom: 0.65rem; line-height: 1.65; color: #e2e8f0; }
+.chat-markdown strong { color: #f8fafc; font-weight: 700; }
+.chat-markdown em { color: #cbd5e1; font-style: italic; }
+.chat-markdown a { color: #7dd3fc; text-decoration: underline; text-underline-offset: 2px; }
+
+.chat-markdown blockquote {
+  margin: 0.6rem 0;
+  padding: 0.55rem 0.8rem;
+  border-left: 3px solid #38bdf8;
+  background: rgba(56, 189, 248, 0.16);
+  border-radius: 0 8px 8px 0;
+  color: #bae6fd;
+}
+
+.chat-markdown code { background: #1f2937; padding: 0.08rem 0.35rem; border-radius: 4px; font-size: 0.82em; color: #e2e8f0; }
+.chat-markdown pre { background: #111827; padding: 0.85rem; border-radius: 10px; overflow-x: auto; margin: 0.5rem 0; border: 1px solid rgba(148, 163, 184, 0.35); }
+.chat-markdown pre code { background: none; padding: 0; color: #e2e8f0; }
+
+.chat-markdown ul,
+.chat-markdown ol { padding-left: 1.25rem; margin-bottom: 0.65rem; }
+
+.chat-markdown li { margin-bottom: 0.3rem; line-height: 1.55; color: #d1d5db; }
+.chat-markdown li::marker { color: #7dd3fc; }
+
+.chat-markdown h1,
+.chat-markdown h2,
+.chat-markdown h3 {
+  margin-top: 0.55rem;
+  margin-bottom: 0.45rem;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: #f8fafc;
+}
+
+.chat-markdown h1 { color: #c7d2fe; }
+.chat-markdown h2 { color: #bae6fd; }
+.chat-markdown h3 { color: #bfdbfe; }
+
+.dark .chat-markdown code { background: #1f2937; color: #e2e8f0; }
+.dark .chat-markdown pre { background: #0f172a; border-color: rgba(148, 163, 184, 0.32); }
+.dark .chat-markdown pre code { color: #e2e8f0; }
+.dark .chat-markdown h1,
+.dark .chat-markdown h2,
+.dark .chat-markdown h3 { color: #f3f4f6; }

@@ -1,0 +1,48 @@
+:root {
+  color-scheme: dark;
+  --app-bg: #050505;
+  --panel-bg: #0c0c0c;
+  --card-bg: #141414;
+  --border: rgba(255, 255, 255, 0.12);
+  --accent-cyan: #22d3ee;
+  --accent-violet: #818cf8;
+  --accent-green: #34d399;
+  --accent-amber: #fbbf24;
+  --accent-rose: #fb7185;
+  --app-text: #e5e7eb;
+  --font-sans: 'Geist', 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+:root.dark {
+  color-scheme: dark;
+  --app-bg: #0b0d12;
+  --panel-bg: #121212;
+  --card-bg: #1a1a1a;
+  --border: rgba(255, 255, 255, 0.12);
+  --app-text: #f0f3f8;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: var(--panel-bg); }
+::-webkit-scrollbar-thumb { background: #d1d5db; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #9ca3af; }
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: var(--app-bg);
+  color: var(--app-text);
+  font-family: var(--font-sans);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body { background-image: none; }
+
+.dark body {
+  background: radial-gradient(1200px 700px at 52% 80%, rgba(255, 255, 255, 0.06) 0%, rgba(11, 13, 18, 0.96) 55%, #0b0d12 100%);
+  color: #e5e7eb;
+}

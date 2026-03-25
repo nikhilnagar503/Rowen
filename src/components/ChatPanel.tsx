@@ -1,19 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
-import type { ChatRuntimeOptions, Message } from '../types/index';
 import MessageList from './chat/MessageList';
 import Composer from './chat/Composer';
 import { useStreamingMessage } from './chat/useStreamingMessage';
-
-interface ChatPanelProps {
-  messages: Message[];
-  runtimeOptions: ChatRuntimeOptions;
-  onRuntimeOptionsChange: (next: ChatRuntimeOptions) => void;
-  isLoading: boolean;
-  isFileLoading: boolean;
-  onSendMessage: (message: string, options?: ChatRuntimeOptions) => void;
-  onUploadFiles: (files: File[]) => void;
-}
+import type { ChatPanelProps } from './chat/ChatPanelTypes';
+import { HiddenFileInput } from './chat/HiddenFileInput';
 
 export default function ChatPanel({
   messages,
@@ -44,7 +35,6 @@ export default function ChatPanel({
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
   }, [messages]);
-  
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,11 +44,9 @@ export default function ChatPanel({
     window.setTimeout(() => autoResizeInput(), 0);
   };
 
-
   useEffect(() => {
     autoResizeInput();
   }, [input]);
-  
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -70,12 +58,6 @@ export default function ChatPanel({
   const handleUploadClick = () => {
     fileInputRef.current?.click();
   };
-
-  const quickSuggestions = [
-    'What is the main goal of your project?',
-    'How would you measure success for this task?',
-    'What other factors influence outcomes?',
-  ];
 
   return (
     <div className="flex h-full flex-col bg-transparent text-slate-100">
@@ -112,20 +94,10 @@ export default function ChatPanel({
         onUploadClick={handleUploadClick}
         inputRef={inputRef}
       />
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".csv,.tsv,.txt"
-        multiple
-        className="hidden"
-        onChange={(e) => {
-          const files = e.target.files ? Array.from(e.target.files) : [];
-          if (files.length > 0) {
-            onUploadFiles(files);
-          }
-          e.currentTarget.value = '';
-        }}
-        disabled={isLoading || isFileLoading}
+      <HiddenFileInput
+        fileInputRef={fileInputRef}
+        onUploadFiles={onUploadFiles}
+        isDisabled={isLoading || isFileLoading}
       />
     </div>
   );

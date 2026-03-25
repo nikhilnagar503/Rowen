@@ -38,11 +38,9 @@ export type ChatRuntimeOptions = {
 export type PersistedSession = {
   id: string;
   sessionTitle?: string | null;
-  fileName: string | null;
   fileNames: string[];
   dfInfo: DataFrameInfo | null;
   messages: Message[];
-  recommendedActions: string[];
   latestGoal?: string | null;
   updatedAt: string;
 };
@@ -57,3 +55,4 @@ export type PersistedSessionSummary = {
 };
 
 export type SyncStatus = 'local-only' | 'syncing' | 'saved' | 'disabled' | 'error';
+

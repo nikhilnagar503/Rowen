@@ -14,18 +14,6 @@ export default function Composer({
   inputRef,
 }: ComposerProps) {
 
-  const autoResizeInput = () => {
-    const el = inputRef.current;
-    if (!el) {
-      return;
-    }
-
-    el.style.height = 'auto';
-    const nextHeight = Math.min(el.scrollHeight, 220);
-    el.style.height = `${Math.max(nextHeight, 52)}px`;
-  };
-  
-
   return (
     <div className="sticky bottom-0 z-20 bg-[#060606]/96 px-3 pb-3 pt-2 backdrop-blur sm:px-6 sm:pb-4 sm:pt-3">
       <form onSubmit={onSubmit} className="mx-auto w-full max-w-[980px]">
@@ -33,10 +21,7 @@ export default function Composer({
           <textarea
             ref={inputRef}
             value={input}
-            onChange={(e) => {
-              setInput(e.target.value);
-              autoResizeInput();
-            }}
+            onChange={(e) => setInput(e.target.value)}
             onKeyDown={onKeyDown}
             placeholder="Send a message..."
             className="min-h-[52px] max-h-[220px] w-full resize-none overflow-y-auto bg-transparent px-1 py-1 text-base text-slate-100 placeholder-slate-500 focus:outline-none"
