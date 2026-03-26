@@ -1,0 +1,108 @@
+"filename", "language", "JSON with Comments", "TypeScript", "Markdown", "JSON", "PostCSS", "TypeScript JSX", "MS SQL", "JavaScript", "comment", "blank", "total"
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\analytics-telemetry.agent.md", "Markdown", 0, 0, 53, 0, 0, 0, 0, 0, 0, 10, 63
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\code-explainer.agent.md", "Markdown", 0, 0, 53, 0, 0, 0, 0, 0, 0, 7, 60
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\data-analyst-builder.agent.md", "Markdown", 0, 0, 35, 0, 0, 0, 0, 0, 0, 7, 42
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\data-connector.agent.md", "Markdown", 0, 0, 51, 0, 0, 0, 0, 0, 0, 10, 61
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\debugging.agent.md", "Markdown", 0, 0, 32, 0, 0, 0, 0, 0, 0, 6, 38
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\founder.agent.md", "Markdown", 0, 0, 46, 0, 0, 0, 0, 0, 0, 8, 54
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\product-evolution-orchestrator.agent.md", "Markdown", 0, 0, 47, 0, 0, 0, 0, 0, 0, 7, 54
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\prompt-architecture-reviewer.agent.md", "Markdown", 0, 0, 47, 0, 0, 0, 0, 0, 0, 9, 56
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\readme-docs-writer.agent.md", "Markdown", 0, 0, 33, 0, 0, 0, 0, 0, 0, 7, 40
+"c:\Users\nagar\Desktop\Rowen__\Rowen\.github\agents\reliability-security.agent.md", "Markdown", 0, 0, 53, 0, 0, 0, 0, 0, 0, 10, 63
+"c:\Users\nagar\Desktop\Rowen__\Rowen\README.md", "Markdown", 0, 0, 54, 0, 0, 0, 0, 0, 0, 20, 74
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\(auth)\layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 6
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\(auth)\sign-in\[[...sign-in]]\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 22, 0, 0, 0, 2, 24
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\(auth)\sign-out\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 12, 0, 0, 0, 2, 14
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\(auth)\sign-up\[[...sign-up]]\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 22, 0, 0, 0, 2, 24
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\chat\route.ts", "TypeScript", 0, 58, 0, 0, 0, 0, 0, 0, 28, 13, 99
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\session\dbClient.ts", "TypeScript", 0, 24, 0, 0, 0, 0, 0, 0, 0, 2, 26
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\session\errors.ts", "TypeScript", 0, 30, 0, 0, 0, 0, 0, 0, 0, 7, 37
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\session\mappers.ts", "TypeScript", 0, 35, 0, 0, 0, 0, 0, 0, 0, 4, 39
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\session\queries.ts", "TypeScript", 0, 83, 0, 0, 0, 0, 0, 0, 0, 16, 99
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\session\route.ts", "TypeScript", 0, 56, 0, 0, 0, 0, 0, 0, 1, 15, 72
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\api\session\types.ts", "TypeScript", 0, 26, 0, 0, 0, 0, 0, 0, 0, 4, 30
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\globals.css", "PostCSS", 0, 0, 0, 0, 5, 0, 0, 0, 0, 2, 7
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\layout.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 26, 0, 0, 0, 4, 30
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\page.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 4, 0, 0, 0, 2, 6
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\styles\base.css", "PostCSS", 0, 0, 0, 0, 43, 0, 0, 0, 0, 6, 49
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\styles\chat-markdown.css", "PostCSS", 0, 0, 0, 0, 37, 0, 0, 0, 0, 8, 45
+"c:\Users\nagar\Desktop\Rowen__\Rowen\app\styles\julius.css", "PostCSS", 0, 0, 0, 0, 54, 0, 0, 0, 0, 9, 63
+"c:\Users\nagar\Desktop\Rowen__\Rowen\docs\API_CONTRACTS.md", "Markdown", 0, 0, 38, 0, 0, 0, 0, 0, 0, 16, 54
+"c:\Users\nagar\Desktop\Rowen__\Rowen\docs\ARCHITECTURE.md", "Markdown", 0, 0, 82, 0, 0, 0, 0, 0, 0, 34, 116
+"c:\Users\nagar\Desktop\Rowen__\Rowen\docs\ONBOARDING.md", "Markdown", 0, 0, 33, 0, 0, 0, 0, 0, 0, 7, 40
+"c:\Users\nagar\Desktop\Rowen__\Rowen\docs\RUNBOOK.md", "Markdown", 0, 0, 35, 0, 0, 0, 0, 0, 0, 11, 46
+"c:\Users\nagar\Desktop\Rowen__\Rowen\eslint.config.js", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 20, 0, 2, 22
+"c:\Users\nagar\Desktop\Rowen__\Rowen\next-env.d.ts", "TypeScript", 0, 1, 0, 0, 0, 0, 0, 0, 4, 2, 7
+"c:\Users\nagar\Desktop\Rowen__\Rowen\next.config.ts", "TypeScript", 0, 6, 0, 0, 0, 0, 0, 0, 0, 3, 9
+"c:\Users\nagar\Desktop\Rowen__\Rowen\package-lock.json", "JSON", 0, 0, 0, 5193, 0, 0, 0, 0, 0, 1, 5194
+"c:\Users\nagar\Desktop\Rowen__\Rowen\package.json", "JSON", 0, 0, 0, 39, 0, 0, 0, 0, 0, 1, 40
+"c:\Users\nagar\Desktop\Rowen__\Rowen\postcss.config.mjs", "JavaScript", 0, 0, 0, 0, 0, 0, 0, 6, 0, 2, 8
+"c:\Users\nagar\Desktop\Rowen__\Rowen\proxy.ts", "TypeScript", 0, 8, 0, 0, 0, 0, 0, 0, 0, 3, 11
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\App.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 36, 0, 0, 16, 7, 59
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\ChatPanel.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 90, 0, 0, 0, 15, 105
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\FileUpload.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 57, 0, 0, 0, 14, 71
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\FileUploadDropZone.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 39, 0, 0, 0, 4, 43
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\FileUploadFeatureCards.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 14, 0, 0, 0, 2, 16
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\ChatPanelTypes.ts", "TypeScript", 0, 10, 0, 0, 0, 0, 0, 0, 0, 2, 12
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\Composer.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 84, 0, 0, 0, 11, 95
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\HiddenFileInput.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 24, 0, 0, 0, 2, 26
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\MessageList.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 91, 0, 0, 0, 10, 101
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\messageUtils.ts", "TypeScript", 0, 28, 0, 0, 0, 0, 0, 0, 0, 9, 37
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\renderQualityDelta.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 32, 0, 0, 0, 6, 38
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\types.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 3, 21
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\chat\useStreamingMessage.ts", "TypeScript", 0, 42, 0, 0, 0, 0, 0, 0, 0, 12, 54
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\fileUploadFeatures.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 1, 6
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\layout\WorkspaceHistoryList.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 27, 0, 0, 0, 4, 31
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\layout\WorkspaceSidebar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 50, 0, 0, 0, 5, 55
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\layout\WorkspaceTopbar.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 21, 0, 0, 0, 3, 24
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\layout\WorkspaceView.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 57, 0, 0, 0, 5, 62
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\components\layout\workspaceTypes.ts", "TypeScript", 0, 14, 0, 0, 0, 0, 0, 0, 0, 2, 16
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\config\niche.ts", "TypeScript", 0, 30, 0, 0, 0, 0, 0, 0, 0, 3, 33
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\features\auth\components\AuthShell.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 40, 0, 0, 0, 7, 47
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\features\auth\components\SignOutCard.tsx", "TypeScript JSX", 0, 0, 0, 0, 0, 40, 0, 0, 0, 8, 48
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp.ts", "TypeScript", 0, 87, 0, 0, 0, 0, 0, 0, 0, 9, 96
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\buildPublicApi.ts", "TypeScript", 0, 54, 0, 0, 0, 0, 0, 0, 0, 4, 58
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\chatActions.ts", "TypeScript", 0, 82, 0, 0, 0, 0, 0, 0, 0, 10, 92
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\chatActionsHelpers.ts", "TypeScript", 0, 75, 0, 0, 0, 0, 0, 0, 0, 9, 84
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\cloudSync\types.ts", "TypeScript", 0, 30, 0, 0, 0, 0, 0, 0, 0, 3, 33
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\cloudSync\useCloudSessionAutoSync.ts", "TypeScript", 0, 74, 0, 0, 0, 0, 0, 0, 0, 7, 81
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\cloudSync\useCloudSessionRestore.ts", "TypeScript", 0, 74, 0, 0, 0, 0, 0, 0, 0, 12, 86
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\cloudSync\useSessionStateApplier.ts", "TypeScript", 0, 73, 0, 0, 0, 0, 0, 0, 0, 7, 80
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\fileActions.ts", "TypeScript", 0, 81, 0, 0, 0, 0, 0, 0, 0, 11, 92
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\fileActionsHelpers.ts", "TypeScript", 0, 43, 0, 0, 0, 0, 0, 0, 0, 7, 50
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\sessionActions.ts", "TypeScript", 0, 88, 0, 0, 0, 0, 0, 0, 0, 9, 97
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\useAppState.ts", "TypeScript", 0, 65, 0, 0, 0, 0, 0, 0, 0, 4, 69
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\useCloudSessionSync.ts", "TypeScript", 0, 80, 0, 0, 0, 0, 0, 0, 0, 6, 86
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\usePyodideGuards.ts", "TypeScript", 0, 40, 0, 0, 0, 0, 0, 0, 0, 7, 47
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\useResetHandler.ts", "TypeScript", 0, 26, 0, 0, 0, 0, 0, 0, 0, 4, 30
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\hooks\useCsvHeroApp\utils.ts", "TypeScript", 0, 42, 0, 0, 0, 0, 0, 0, 0, 10, 52
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\ai.ts", "TypeScript", 0, 2, 0, 0, 0, 0, 0, 0, 0, 1, 3
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\chatClient.ts", "TypeScript", 0, 45, 0, 0, 0, 0, 0, 0, 0, 6, 51
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\context.ts", "TypeScript", 0, 37, 0, 0, 0, 0, 0, 0, 0, 6, 43
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\defaultRuntime.ts", "TypeScript", 0, 7, 0, 0, 0, 0, 0, 0, 0, 2, 9
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\messageBuilder.ts", "TypeScript", 0, 37, 0, 0, 0, 0, 0, 0, 0, 8, 45
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\onboarding.ts", "TypeScript", 0, 90, 0, 0, 0, 0, 0, 0, 0, 16, 106
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\prompts\analystPrompt.ts", "TypeScript", 0, 33, 0, 0, 0, 0, 0, 0, 0, 2, 35
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\prompts\continuationPrompt.ts", "TypeScript", 0, 11, 0, 0, 0, 0, 0, 0, 0, 1, 12
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\prompts\onboardingPrompt.ts", "TypeScript", 0, 16, 0, 0, 0, 0, 0, 0, 0, 1, 17
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\sendMessage.ts", "TypeScript", 0, 16, 0, 0, 0, 0, 0, 0, 0, 2, 18
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\aiModules\types.ts", "TypeScript", 0, 8, 0, 0, 0, 0, 0, 0, 0, 2, 10
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\errors.ts", "TypeScript", 0, 54, 0, 0, 0, 0, 0, 0, 0, 12, 66
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\observability.ts", "TypeScript", 0, 18, 0, 0, 0, 0, 0, 0, 0, 5, 23
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\persistence.ts", "TypeScript", 0, 11, 0, 0, 0, 0, 0, 0, 0, 3, 14
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\persistenceModules\fetchers.ts", "TypeScript", 0, 42, 0, 0, 0, 0, 0, 0, 0, 10, 52
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\persistenceModules\helpers.ts", "TypeScript", 0, 34, 0, 0, 0, 0, 0, 0, 0, 9, 43
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\persistenceModules\sync.ts", "TypeScript", 0, 32, 0, 0, 0, 0, 0, 0, 0, 7, 39
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\persistenceModules\types.ts", "TypeScript", 0, 19, 0, 0, 0, 0, 0, 0, 0, 4, 23
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\pyodide.ts", "TypeScript", 0, 4, 0, 0, 0, 0, 0, 0, 0, 1, 5
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\pyodideModules\executeCode.ts", "TypeScript", 0, 59, 0, 0, 0, 0, 0, 0, 0, 6, 65
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\pyodideModules\getCleanCsv.ts", "TypeScript", 0, 5, 0, 0, 0, 0, 0, 0, 0, 2, 7
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\pyodideModules\init.ts", "TypeScript", 0, 49, 0, 0, 0, 0, 0, 0, 0, 10, 59
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\pyodideModules\loadCsv.ts", "TypeScript", 0, 27, 0, 0, 0, 0, 0, 0, 0, 5, 32
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\pyodideModules\runtime.ts", "TypeScript", 0, 40, 0, 0, 0, 0, 0, 0, 0, 12, 52
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\lib\supabase\server.ts", "TypeScript", 0, 50, 0, 0, 0, 0, 0, 0, 0, 12, 62
+"c:\Users\nagar\Desktop\Rowen__\Rowen\src\types\index.ts", "TypeScript", 0, 53, 0, 0, 0, 0, 0, 0, 0, 7, 60
+"c:\Users\nagar\Desktop\Rowen__\Rowen\supabase\schema.sql", "MS SQL", 0, 0, 0, 0, 0, 0, 49, 0, 0, 8, 57
+"c:\Users\nagar\Desktop\Rowen__\Rowen\tsconfig.json", "JSON with Comments", 36, 0, 0, 0, 0, 0, 0, 0, 0, 1, 37
+"c:\Users\nagar\Desktop\Rowen__\Rowen\tsconfig.tsbuildinfo", "JSON", 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1
+"Total", "-", 36, 2287, 692, 5233, 139, 792, 49, 26, 49, 698, 10001

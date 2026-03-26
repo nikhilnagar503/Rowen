@@ -1,7 +1,7 @@
 import type { Dispatch, SetStateAction } from 'react';
 import { executeCode } from '../../lib/pyodide';
 import { sendMessage } from '../../lib/ai';
-import type { ChatRuntimeOptions, DataFrameInfo, Message } from '../../types/index';
+import type { DataFrameInfo, Message } from '../../types/index';
 import { newId } from './utils';
 
 type Setter<T> = Dispatch<SetStateAction<T>>;
@@ -10,7 +10,6 @@ type RunAgentLoopArgs = {
   userText: string;
   initialDfInfo: DataFrameInfo | null;
   initialHistory: Message[];
-  options: ChatRuntimeOptions;
   fileNames: string[];
   activeFileName: string | null;
   setMessages: Setter<Message[]>;
@@ -21,7 +20,6 @@ export async function runAgentLoop({
   userText,
   initialDfInfo,
   initialHistory,
-  options,
   fileNames,
   activeFileName,
   setMessages,
@@ -32,8 +30,7 @@ export async function runAgentLoop({
     initialDfInfo,
     initialHistory,
     fileNames,
-    activeFileName,
-    options
+    activeFileName
   );
 
   if (!code) {

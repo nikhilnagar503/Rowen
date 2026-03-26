@@ -1,4 +1,4 @@
-import { createCorrelationId, logAppEvent } from '../observability';
+import { logAppEvent } from '../observability';
 import {
   getPyodide,
   isInitDone,
@@ -9,15 +9,13 @@ import {
 } from './runtime';
 
 export async function initPyodide(): Promise<void> {
-  const correlationId = createCorrelationId('pyodide-init');
-
   if (isInitDone() && getPyodide()) {
-    logAppEvent('pyodide.init', 'already_initialized', { correlationId });
+    logAppEvent('pyodide.init', 'already_initialized');
     return;
   }
 
   try {
-    logAppEvent('pyodide.init', 'start', { correlationId });
+    logAppEvent('pyodide.init', 'start');
     const pyodideWindow = window as WindowWithPyodide;
 
     if (!pyodideWindow.loadPyodide) {
@@ -52,7 +50,7 @@ active_dataset_name = None
     setPyodide(instance);
     setInitDone(true);
   } catch (error) {
-    resetPyodideState('pyodide.init', correlationId, error);
+    resetPyodideState('pyodide.init', error);
     throw error;
   }
 }

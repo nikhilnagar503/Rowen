@@ -36,11 +36,6 @@ type ChatMessage = {
 type ChatRequestBody = {
   messages?: ChatMessage[];
   model?: 'gpt-4o-mini' | 'gpt-4o';
-  runtimeOptions?: {
-    toolsEnabled?: boolean;
-    connectorsEnabled?: boolean;
-    advancedReasoning?: boolean;
-  };
 };
 
 export async function POST(request: Request) {
@@ -58,12 +53,6 @@ export async function POST(request: Request) {
     }
 
     const model = body.model === 'gpt-4o' ? 'gpt-4o' : 'gpt-4o-mini';
-    const runtimeOptions = {
-      toolsEnabled: body.runtimeOptions?.toolsEnabled ?? true,
-      connectorsEnabled: body.runtimeOptions?.connectorsEnabled ?? true,
-      advancedReasoning: body.runtimeOptions?.advancedReasoning ?? false,
-    };
-
     const upstream = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -74,7 +63,7 @@ export async function POST(request: Request) {
         model,
         messages: body.messages,
         max_tokens: 4096,
-        temperature: runtimeOptions.advancedReasoning ? 0.3 : 0.2,
+        temperature: 0.2,
       }),
     });
 

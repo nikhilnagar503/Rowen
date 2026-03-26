@@ -4,8 +4,7 @@
 
 Request body:
 - `messages`: array of `{ role, content }`
-- `model`: string
-- `runtimeOptions`: `{ toolsEnabled, connectorsEnabled, advancedReasoning }`
+- `model`: optional string (`gpt-4o-mini` or `gpt-4o`)
 
 Success response:
 - `{ content: string }`

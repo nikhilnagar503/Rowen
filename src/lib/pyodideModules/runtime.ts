@@ -38,9 +38,9 @@ export function assertPyodideReady(): PyodideApi {
   return pyodide;
 }
 
-export function resetPyodideState(scope: string, correlationId: string, error: unknown): void {
+export function resetPyodideState(scope: string, error: unknown): void {
   const appError = normalizeError(error);
-  logAppError(scope, correlationId, appError);
+  logAppError(scope, `${scope}.reset`, appError);
   pyodide = null;
   initDone = false;
 }

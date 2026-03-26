@@ -28,19 +28,14 @@ export type CodeExecutionResult = {
   updatedDfInfo: DataFrameInfo | null;
 };
 
-export type ChatRuntimeOptions = {
-  model: 'gpt-4o-mini' | 'gpt-4o';
-  toolsEnabled: boolean;
-  connectorsEnabled: boolean;
-  advancedReasoning: boolean;
-};
-
 export type PersistedSession = {
   id: string;
   sessionTitle?: string | null;
+  fileName: string | null;
   fileNames: string[];
   dfInfo: DataFrameInfo | null;
   messages: Message[];
+  recommendedActions: string[];
   latestGoal?: string | null;
   updatedAt: string;
 };
@@ -55,4 +50,3 @@ export type PersistedSessionSummary = {
 };
 
 export type SyncStatus = 'local-only' | 'syncing' | 'saved' | 'disabled' | 'error';
-

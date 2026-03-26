@@ -8,8 +8,6 @@ import { HiddenFileInput } from './chat/HiddenFileInput';
 
 export default function ChatPanel({
   messages,
-  runtimeOptions,
-  onRuntimeOptionsChange,
   isLoading,
   isFileLoading,
   onSendMessage,
@@ -39,7 +37,7 @@ export default function ChatPanel({
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    onSendMessage(input.trim(), runtimeOptions);
+    onSendMessage(input.trim());
     setInput('');
     window.setTimeout(() => autoResizeInput(), 0);
   };
@@ -85,8 +83,6 @@ export default function ChatPanel({
       <Composer
         input={input}
         setInput={setInput}
-        runtimeOptions={runtimeOptions}
-        onRuntimeOptionsChange={onRuntimeOptionsChange}
         isLoading={isLoading}
         isFileLoading={isFileLoading}
         onSubmit={handleSubmit}

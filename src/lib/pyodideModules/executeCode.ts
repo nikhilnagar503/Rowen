@@ -1,13 +1,11 @@
 import type { CodeExecutionResult } from '../../types/index';
-import { createCorrelationId, logAppError, logAppEvent } from '../observability';
+import { logAppError, logAppEvent } from '../observability';
 import { assertPyodideReady, getErrorMessage } from './runtime';
 
 export async function executeCode(code: string): Promise<CodeExecutionResult> {
-  const correlationId = createCorrelationId('pyodide-execute');
-  const pyodide = assertPyodideReady();
-
   try {
-    logAppEvent('pyodide.execute', 'start', { correlationId });
+    const pyodide = assertPyodideReady();
+    logAppEvent('pyodide.execute', 'start');
     const wrappedCode = `
 import sys
 import io
@@ -53,7 +51,7 @@ json.dumps(_result)
       updatedDfInfo: result.updatedDfInfo || null,
     };
   } catch (error: unknown) {
-    logAppError('pyodide.execute', correlationId, { code: 'PYODIDE_EXECUTION_FAILED', message: getErrorMessage(error), retryable: false, cause: error });
+    logAppError('pyodide.execute', 'pyodide-execute', { code: 'PYODIDE_EXECUTION_FAILED', message: getErrorMessage(error), retryable: false, cause: error });
     return {
       output: '',
       tableHtml: null,

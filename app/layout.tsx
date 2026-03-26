@@ -10,8 +10,8 @@ const manrope = Manrope({
 });
 
 export const metadata: Metadata = {
-  title: 'CSVHero',
-  description: 'Clean and analyze CSV data with AI',
+  title: 'Rowen',
+  description: 'your only data analyst assistant',
 };
 
 export default function RootLayout({
@@ -22,8 +22,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${manrope.variable} antialiased`}>
-        <ClerkProvider>{children}</ClerkProvider>
-      </body>
+        <ClerkProvider>{children}</ClerkProvider>   
+      </body>  
     </html>
   );
 }

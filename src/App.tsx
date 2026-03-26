@@ -25,8 +25,6 @@ function App() {
     messages,
     isLoading,
     isPyodideLoading,
-    runtimeOptions,
-    setRuntimeOptions,
     sessionId,
     sessionList,
     handleSendMessage,
@@ -47,8 +45,6 @@ function App() {
         activeSessionId={sessionId}
         sessionList={sessionList}
         onSelectSession={handleSelectSession}
-        runtimeOptions={runtimeOptions}
-        onRuntimeOptionsChange={setRuntimeOptions}
       />
     </>
   );

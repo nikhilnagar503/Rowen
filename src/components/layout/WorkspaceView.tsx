@@ -16,8 +16,6 @@ export default function WorkspaceView({
   activeSessionId,
   sessionList,
   onSelectSession,
-  runtimeOptions,
-  onRuntimeOptionsChange,
 }: WorkspaceViewProps) {
   const [sidebarExpanded, setSidebarExpanded] = useState(false);
   const [activePrimaryNavKey, setActivePrimaryNavKey] = useState<NavKey>('new');
@@ -46,8 +44,6 @@ export default function WorkspaceView({
             <WorkspaceTopbar activeSessionId={activeSessionId} />
             <ChatPanel
               messages={messages}
-              runtimeOptions={runtimeOptions}
-              onRuntimeOptionsChange={onRuntimeOptionsChange}
               isLoading={isLoading}
               isFileLoading={isPyodideLoading}
               onSendMessage={onSendMessage}

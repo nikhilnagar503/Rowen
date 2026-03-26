@@ -1,4 +1,4 @@
-export const ONBOARDING_PROMPT = `You are CSVHero's onboarding assistant.
+export const ONBOARDING_PROMPT = `You are Rowen's onboarding assistant.
 
 Goal: after dataset upload, give a broad understanding of the dataset and ask focused questions before any cleaning/analysis code is run.
 

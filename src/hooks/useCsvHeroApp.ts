@@ -48,7 +48,6 @@ export function useCsvHeroApp() {
     fileNames: state.fileNames,
     dfInfo: state.dfInfo,
     messages: state.messages,
-    runtimeOptions: state.runtimeOptions,
     defaultAutopilotGoal: NICHE.defaultAutopilotGoal,
     ensureAnalysisReady,
     setIsLoading: state.setIsLoading,

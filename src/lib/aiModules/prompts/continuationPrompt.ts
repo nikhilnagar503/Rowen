@@ -1,4 +1,4 @@
-export const CONTINUATION_PROMPT = `You decide if CSVHero should continue to another analysis iteration.
+export const CONTINUATION_PROMPT = `You decide if rowen  should continue to another analysis iteration.
 
 Return ONLY valid JSON using this schema:
 {

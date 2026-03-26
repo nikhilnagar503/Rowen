@@ -1,33 +1,31 @@
-import { createCorrelationId, logAppEvent } from '../observability';
+import { logAppEvent } from '../observability';
 import { isUnavailable, readApiError, throwNormalized, toStorageUnavailable } from './helpers';
 import type { SessionApiResponse, SessionListResponse } from './types';
 
 async function requestSessionGet(path: string, scope: string, meta?: Record<string, unknown>): Promise<Response | null> {
-  const correlationId = createCorrelationId(scope);
-
   try {
-    logAppEvent(scope, 'request_started', { correlationId, ...(meta ?? {}) });
+    logAppEvent(scope, 'request_started', meta);
     const response = await fetch(path, { method: 'GET', cache: 'no-store' });
 
     if (response.status === 401) {
-      toStorageUnavailable(scope, correlationId);
+      toStorageUnavailable(scope);
       return null;
     }
 
     if (!response.ok) {
       const errorMessage = await readApiError(response);
       if (isUnavailable(errorMessage, response.status)) {
-        toStorageUnavailable(scope, correlationId);
+        toStorageUnavailable(scope);
         return null;
       }
 
-      throwNormalized(scope, correlationId, errorMessage);
+      throwNormalized(scope, errorMessage);
     }
 
-    logAppEvent(scope, 'request_succeeded', { correlationId, ...(meta ?? {}) });
+    logAppEvent(scope, 'request_succeeded', meta);
     return response;
   } catch {
-    toStorageUnavailable(scope, correlationId);
+    toStorageUnavailable(scope);
     return null;
   }
 }

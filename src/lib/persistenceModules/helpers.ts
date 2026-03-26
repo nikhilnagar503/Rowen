@@ -27,13 +27,13 @@ export async function readApiError(response: Response): Promise<string> {
   return raw;
 }
 
-export function toStorageUnavailable(scope: string, correlationId: string) {
-  logAppEvent(scope, 'storage_unavailable', { correlationId });
+export function toStorageUnavailable(scope: string) {
+  logAppEvent(scope, 'storage_unavailable');
 }
 
-export function throwNormalized(scope: string, correlationId: string, message: string): never {
+export function throwNormalized(scope: string, message: string): never {
   const appError = normalizeError(new Error(message));
-  logAppError(scope, correlationId, appError);
+  logAppError(scope, `${scope}.error`, appError);
   throw new Error(appError.message);
 }
 

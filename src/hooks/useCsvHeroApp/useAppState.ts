@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import type { ChatRuntimeOptions, DataFrameInfo, Message, PersistedSessionSummary, SyncStatus } from '../../types/index';
+import type { DataFrameInfo, Message, PersistedSessionSummary, SyncStatus } from '../../types/index';
 import { getLatestGoal, getQualitySnapshot, OMIT_DATASET_FROM_CLOUD } from './utils';
 
 export function useAppState() {
@@ -11,12 +11,6 @@ export function useAppState() {
   const [sessionList, setSessionList] = useState<PersistedSessionSummary[]>([]);
   const [syncStatus, setSyncStatus] = useState<SyncStatus>('local-only');
   const [requiresFileReload, setRequiresFileReload] = useState(false);
-  const [runtimeOptions, setRuntimeOptions] = useState<ChatRuntimeOptions>({
-    model: 'gpt-4o-mini',
-    toolsEnabled: true,
-    connectorsEnabled: true,
-    advancedReasoning: false,
-  });
   const [isLoading, setIsLoading] = useState(false);
   const [isPyodideReady, setIsPyodideReady] = useState(false);
   const [isPyodideLoading, setIsPyodideLoading] = useState(false);
@@ -51,8 +45,6 @@ export function useAppState() {
     setSyncStatus,
     requiresFileReload,
     setRequiresFileReload,
-    runtimeOptions,
-    setRuntimeOptions,
     isLoading,
     setIsLoading,
     isPyodideReady,

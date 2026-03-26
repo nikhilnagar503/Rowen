@@ -1,5 +1,5 @@
-import type { ChatRuntimeOptions, DataFrameInfo, Message } from '../../types/index';
-import { getDatasetCatalogContext, getDfContext, getRuntimeContext } from './context';
+import type { DataFrameInfo, Message } from '../../types/index';
+import { getDatasetCatalogContext, getDfContext } from './context';
 import { SYSTEM_PROMPT } from './prompts/analystPrompt';
 
 export function buildMessages(
@@ -7,14 +7,12 @@ export function buildMessages(
   dfInfo: DataFrameInfo | null,
   history: Message[],
   datasetNames: string[],
-  activeDatasetName: string | null,
-  runtimeOptions: ChatRuntimeOptions
+  activeDatasetName: string | null
 ): Array<{ role: string; content: string }> {
   const messages: Array<{ role: string; content: string }> = [{ role: 'system', content: SYSTEM_PROMPT }];
 
   if (dfInfo) messages.push({ role: 'system', content: getDfContext(dfInfo) });
   messages.push({ role: 'system', content: getDatasetCatalogContext(datasetNames, activeDatasetName) });
-  messages.push({ role: 'system', content: getRuntimeContext(runtimeOptions) });
 
   for (const msg of history.slice(-10)) {
     if (msg.role === 'user') {
