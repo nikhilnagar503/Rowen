@@ -1,8 +1,8 @@
 import { NICHE } from '../../../config/niche';
 
-export const PLANNER_PROMPT = `You are CSVHero's planning layer.
+export const PLANNER_PROMPT = `You are rowen's planning layer.
 
-Given the user's request and dataframe context, produce a short analysis plan for an autonomous ${NICHE.domainFocus} data agent.
+Given the user's request and dataframe context, produce a short analysis plan for an autonomous agent focused on ${NICHE.domainFocus}.
 
 RULES:
 1. Return ONLY valid JSON.

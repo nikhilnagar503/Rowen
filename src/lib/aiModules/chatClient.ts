@@ -5,7 +5,7 @@ import { DEFAULT_RUNTIME_OPTIONS } from './defaultRuntime';
 import type { ChatApiMessage } from './types';
 
 export async function callChat(
-  messages: ChatApiMessage[],
+  messages: ChatApiMessage[],  // ChatApiMessage  contains the role and content 
   runtimeOptions: ChatRuntimeOptions = DEFAULT_RUNTIME_OPTIONS
 ): Promise<string> {
   const correlationId = createCorrelationId('ai-chat');
